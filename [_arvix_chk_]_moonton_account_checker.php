@@ -57,7 +57,8 @@ echo "\n\n";
 echo "++---==========[  By Borayach  ]==========---++\n";
 echo "\n\n";
 $i = 1;
-$fh = fopen("$file", "r"); 
+$fh = fopen("$file", "r");
+$baris = count(file($file));
 while(true){
 $line = fgets($fh);
 if($line == null)break;
@@ -73,20 +74,20 @@ echo "[!][] Error Get Response";
 }else
 if($ekstakgan['response'] == '200'){
 if($ekstakgan['status'] == 'live'){
-echo "[-][] [LIVE] [$email]\n";	
+echo "[-][$i/$baris] [LIVE] [$email]\n";	
 	$fhz = fopen("$folder/live.txt", "a+"); 
 	$stringData = "live => $email\n";
 	fwrite($fhz, $stringData);
 	fclose($fhz);
 }else{
-echo "[-][] [DEAD] [$email]\n";
+echo "[-][$i/$baris] [DEAD] [$email]\n";
 	$fhz = fopen("$folder/dead.txt", "a+"); 
 	$stringData = "dead => $email\n";
 	fwrite($fhz, $stringData);
 	fclose($fhz);
 }
 }else{
-echo "[-][] [Unknown] [$email]\n";
+echo "[-][$i/$baris] [Unknown] [$email]\n";
 	$fhz = fopen("$folder/unknown.txt", "a+"); 
 	$stringData = "unknown => $email\n";
 	fwrite($fhz, $stringData);
